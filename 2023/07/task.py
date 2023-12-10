@@ -1,12 +1,12 @@
 import sys
 from functools import cmp_to_key
 
-STRENGTH = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A']
-STRENGTH_2 = ['J', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'Q', 'K', 'A']
+STRENGTH = ["2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A"]
+STRENGTH_2 = ["J", "2", "3", "4", "5", "6", "7", "8", "9", "T", "Q", "K", "A"]
 hands = []
 
 with open(sys.argv[1]) as f:
-    hands = [h.split() for h in f.read().strip().split('\n')]
+    hands = [h.split() for h in f.read().strip().split("\n")]
 
 
 def compare_counts(a, b):
@@ -32,18 +32,20 @@ def evaluate(hands):
         for c in cards:
             counts[c] = counts[c] + 1 if c in counts else 1
 
-        ordered_counts = sorted(counts.items(), key=cmp_to_key(compare_counts), reverse=True)
+        ordered_counts = sorted(
+            counts.items(), key=cmp_to_key(compare_counts), reverse=True
+        )
 
         rank = calculate_rank(ordered_counts)
 
-        js = counts.get('J', 0)
+        js = counts.get("J", 0)
         counts2 = sorted(
-                [c for c in ordered_counts.copy() if c[0] != 'J'],
-                key=cmp_to_key(compare_counts_2),
-                reverse=True
-                )
+            [c for c in ordered_counts.copy() if c[0] != "J"],
+            key=cmp_to_key(compare_counts_2),
+            reverse=True,
+        )
         if not counts2:
-            counts2 = [('J', 0)]
+            counts2 = [("J", 0)]
 
         print(counts2)
         counts2[0] = (counts2[0][0], counts2[0][1] + js)
@@ -101,11 +103,11 @@ score = 0
 for i in range(1, len(ordered) + 1):
     print(ordered[i - 1])
     score += i * ordered[i - 1][1]
-print('TASK 1:', score)
+print("TASK 1:", score)
 
 ordered = sorted(evaluate(hands), key=cmp_to_key(compare_hands_2))
 score = 0
 for i in range(1, len(ordered) + 1):
     print(ordered[i - 1])
     score += i * ordered[i - 1][1]
-print('TASK 2:', score)
+print("TASK 2:", score)

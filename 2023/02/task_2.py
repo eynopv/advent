@@ -8,15 +8,11 @@ def main(data):
 
 
 def getminimumset(game):
-    gameid, turns = game.split(': ')
-    turns = turns.split('; ')
-    highest = {
-            'red': 0,
-            'green': 0,
-            'blue': 0
-    }
+    gameid, turns = game.split(": ")
+    turns = turns.split("; ")
+    highest = {"red": 0, "green": 0, "blue": 0}
     for turn in turns:
-        cubes = turn.split(', ')
+        cubes = turn.split(", ")
         for cube in cubes:
             num, color = cube.split()
             if highest[color] < int(num):
@@ -31,6 +27,6 @@ def calculatepower(cubes):
     return power
 
 
-if __name__ == '__main__':
-    data = load('./data.txt')
+if __name__ == "__main__":
+    data = load("./data.txt")
     main(data)

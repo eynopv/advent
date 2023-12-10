@@ -10,8 +10,8 @@ def main(data):
 def first(data):
     total = 0
     for card in data:
-        _, lists = card.split(': ')
-        winning, numbers = lists.split(' | ')
+        _, lists = card.split(": ")
+        winning, numbers = lists.split(" | ")
         winning = [int(n.strip()) for n in winning.split()]
         numbers = [int(n.strip()) for n in numbers.split()]
         points = 0
@@ -26,8 +26,8 @@ def second(data):
     counts = [1 for _ in range(len(data))]
     for i in range(len(data)):
         card = data[i]
-        _, lists = card.split(': ')
-        winning, numbers = lists.split(' | ')
+        _, lists = card.split(": ")
+        winning, numbers = lists.split(" | ")
         winning = [int(n.strip()) for n in winning.split()]
         numbers = [int(n.strip()) for n in numbers.split()]
 
@@ -39,12 +39,11 @@ def second(data):
     print(f"Cards: {sum(counts)}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print('Provide data file')
-        print('Example: python task.py [data.txt]')
+        print("Provide data file")
+        print("Example: python task.py [data.txt]")
         sys.exit(-1)
     fname = sys.argv[1]
     data = load(fname)
     main(data)
-

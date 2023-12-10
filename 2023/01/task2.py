@@ -1,7 +1,17 @@
 from loader import load
 
 
-DIGITS = {'one':1, 'two':2, 'three':3, 'four':4, 'five':5, 'six':6, 'seven':7, 'eight':8, 'nine':9}
+DIGITS = {
+    "one": 1,
+    "two": 2,
+    "three": 3,
+    "four": 4,
+    "five": 5,
+    "six": 6,
+    "seven": 7,
+    "eight": 8,
+    "nine": 9,
+}
 
 
 def main(task: str):
@@ -11,7 +21,7 @@ def main(task: str):
 
 def getcalibrationvalue(line: str) -> int:
     alldigits = getalldigits(line)
-    return int(f'{alldigits[0]}{alldigits[-1]}')
+    return int(f"{alldigits[0]}{alldigits[-1]}")
 
 
 def getalldigits(s: str) -> str:
@@ -28,6 +38,6 @@ def getalldigits(s: str) -> str:
     return ds
 
 
-if __name__ == '__main__':
-    task = load('./data/data.txt')
+if __name__ == "__main__":
+    task = load("./data/data.txt")
     print(main(task))

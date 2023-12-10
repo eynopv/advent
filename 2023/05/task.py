@@ -3,16 +3,17 @@ from typing import Dict, List
 from loader import load
 
 
-
 def main(data: str) -> None:
     data_dict = parse_data(data)
-    seeds = data_dict.get('seeds', [])
+    seeds = data_dict.get("seeds", [])
     results = [process_seed(seed, data_dict) for seed in seeds]
     smallest = min(results)
     print(f"Smallest: {smallest}")
 
-    seed_ranges = [seeds[i:i+2] for i in range(0, len(seeds), 2)]
-    results_range = [process_seed_range(seed_range, data_dict) for seed_range in seed_ranges]
+    seed_ranges = [seeds[i : i + 2] for i in range(0, len(seeds), 2)]
+    results_range = [
+        process_seed_range(seed_range, data_dict) for seed_range in seed_ranges
+    ]
     smallest_range = min(results_range)
     print(f"Smallest range: {smallest_range}")
 
@@ -20,13 +21,13 @@ def main(data: str) -> None:
 def process_seed_range(seed_range: List[int], data: Dict[str, List[List[int]]]) -> int:
     print("Trying seed", seed_range)
     maps_order = [
-        'seed-to-soil map',
-        'soil-to-fertilizer map',
-        'fertilizer-to-water map',
-        'water-to-light map',
-        'light-to-temperature map',
-        'temperature-to-humidity map',
-        'humidity-to-location map'
+        "seed-to-soil map",
+        "soil-to-fertilizer map",
+        "fertilizer-to-water map",
+        "water-to-light map",
+        "light-to-temperature map",
+        "temperature-to-humidity map",
+        "humidity-to-location map",
     ]
 
     current_ranges = [seed_range]
@@ -41,7 +42,6 @@ def process_seed_range(seed_range: List[int], data: Dict[str, List[List[int]]]) 
         print("CURRENT RANGE", current_ranges)
 
     print(current_ranges)
-
 
 
 def process(seed_range, data):
@@ -65,17 +65,17 @@ def process(seed_range, data):
             continue
 
         if s1 < s2:
-            print('s1 < s2')
+            print("s1 < s2")
             rs += [[dst, s1 - s2 + 1]]
         else:
             rs += [[s1, s1 - s2 + 1]]
 
         if s1 > s2 and e2 < e1:
-            print('s1 > s2 and e1 > s2')
+            print("s1 > s2 and e1 > s2")
             rs += [[dst, e2 - s2 + 1]]
-        
+
         if e2 < e1:
-            print('e2 < e1')
+            print("e2 < e1")
             rs += [[e2, e1 - e2 + 1]]
 
     print("RS", rs)
@@ -87,17 +87,17 @@ def process(seed_range, data):
 
 
 def parse_data(input_data: str) -> Dict[str, List[List[int]]]:
-    lines = input_data.strip().split('\n')
+    lines = input_data.strip().split("\n")
 
     data = {}
-    current_key = ''
+    current_key = ""
     current_values = []
 
     for line in lines:
-        if line.startswith('seeds:'):
-            seeds_values = line.split(':')[1].strip().split()
-            data['seeds'] = list(map(int, seeds_values))
-        elif line.endswith(':'):
+        if line.startswith("seeds:"):
+            seeds_values = line.split(":")[1].strip().split()
+            data["seeds"] = list(map(int, seeds_values))
+        elif line.endswith(":"):
             if current_key and current_values:
                 data[current_key] = current_values
             current_key = line[:-1]
@@ -121,13 +121,13 @@ def process_seed(seed: int, data: Dict[str, List[List[int]]]) -> int:
     current_value = seed
 
     maps_order = [
-        'seed-to-soil map',
-        'soil-to-fertilizer map',
-        'fertilizer-to-water map',
-        'water-to-light map',
-        'light-to-temperature map',
-        'temperature-to-humidity map',
-        'humidity-to-location map'
+        "seed-to-soil map",
+        "soil-to-fertilizer map",
+        "fertilizer-to-water map",
+        "water-to-light map",
+        "light-to-temperature map",
+        "temperature-to-humidity map",
+        "humidity-to-location map",
     ]
 
     for map_name in maps_order:
@@ -143,10 +143,10 @@ def process_seed(seed: int, data: Dict[str, List[List[int]]]) -> int:
     return current_value
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print('Provide data file')
-        print('Example: python task.py [data.txt]')
+        print("Provide data file")
+        print("Example: python task.py [data.txt]")
         sys.exit(-1)
     fname = sys.argv[1]
     with open(fname) as f:

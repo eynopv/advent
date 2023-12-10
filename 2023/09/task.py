@@ -6,7 +6,7 @@ def process(data):
 
 
 def predict_next(h):
-    if [n for n in h if n!= 0]:
+    if [n for n in h if n != 0]:
         return h[-1] + predict_next(get_sequence(h))
     return h[-1]
 
@@ -22,9 +22,8 @@ def get_sequence(h):
 histories = []
 
 with open(sys.argv[1]) as f:
-    data = f.read().strip().split('\n')
-    histories = [[int(n) for n in d.split(' ')] for d in data]
+    data = f.read().strip().split("\n")
+    histories = [[int(n) for n in d.split(" ")] for d in data]
 
-print(f'TASK 1: {sum(process(histories))}')
-print(f'TASK 2: {sum(process([s[::-1] for s in histories]))}')
-
+print(f"TASK 1: {sum(process(histories))}")
+print(f"TASK 2: {sum(process([s[::-1] for s in histories]))}")

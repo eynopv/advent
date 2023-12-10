@@ -9,7 +9,7 @@ def main(task: str):
 def getcalibrationvalue(line: str) -> int:
     first = getfirstdigit(line)
     last = getfirstdigit(line[::-1])
-    return int(f'{first}{last}')
+    return int(f"{first}{last}")
 
 
 def getfirstdigit(s: str) -> str:
@@ -18,6 +18,6 @@ def getfirstdigit(s: str) -> str:
             return c
 
 
-if __name__ == '__main__':
-    task = load('./data/data.txt')
+if __name__ == "__main__":
+    task = load("./data/data.txt")
     print(main(task))
