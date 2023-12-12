@@ -21,6 +21,8 @@ def count_options(s, validators, current_group):
     # invalid option
     if current_group and not validators:
         return 0
+    if current_group and current_group > validators[0]:
+        return 0
     if current_group and s[0] == "." and current_group != validators[0]:
         return 0
     if s.count("#") + s.count("?") + current_group < sum(validators):
