@@ -31,13 +31,13 @@ def count_options(s, validators, current_group):
         c += count_options("#" + s[1:], validators, current_group)
         c += count_options("." + s[1:], validators, current_group)
         return c
-    
-    if s[0] == '#':
+
+    if s[0] == "#":
         if current_group:
             return count_options(s[1:], validators, current_group + 1)
         return count_options(s[1:], validators, 1)
 
-    if s[0] == '.':
+    if s[0] == ".":
         if current_group and current_group == validators[0]:
             return count_options(s[1:], validators[1:], 0)
         return count_options(s[1:], validators, 0)
@@ -57,4 +57,4 @@ end = time.time()
 
 print("PART 1:", p1)
 print("PART 2:", p2)
-print('Elapsed:', end - start)
+print("Elapsed:", end - start)
