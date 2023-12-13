@@ -22,7 +22,7 @@ def find_reflection(pattern, smudges = 0):
                 to_down = pattern[pivot:pivot + size][::-1]
             else:
                 to_up = pattern[pivot - size - 1:pivot]
-                to_down = pattern[pivot:pivot + size][::-1]
+                to_down = pattern[pivot:][::-1]
 
             delta = 0
             for i in range(len(to_up)):
