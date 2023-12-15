@@ -2,9 +2,10 @@ import sys
 
 data = []
 with open(sys.argv[1]) as f:
-    data = f.read().strip().split(',')
+    data = f.read().strip().split(",")
 
 print(data)
+
 
 def make_hash(s):
     value = 0
@@ -19,8 +20,7 @@ p1 = 0
 for s in data:
     p1 += make_hash(s)
 
-print('PART 1:', p1)
-
+print("PART 1:", p1)
 
 
 lenses = {}
@@ -39,7 +39,7 @@ def add_lens(label, focal):
         lenses[label] = make_hash(label)
     box = lenses[label]
     lens_pos = get_lens_position(boxes[box], label)
-    print('Adding', label, focal, 'to box', box)
+    print("Adding", label, focal, "to box", box)
     if lens_pos < 0:
         boxes[box].append((label, focal))
     else:
@@ -50,24 +50,22 @@ def remove_lens(label):
     if label not in lenses:
         return
     lens_pos = get_lens_position(boxes[lenses[label]], label)
-    print('Removing', label, 'from box', lenses[label])
+    print("Removing", label, "from box", lenses[label])
     if lens_pos >= 0:
-        boxes[lenses[label]] = boxes[lenses[label]][0:lens_pos] + boxes[lenses[label]][lens_pos + 1:]
+        boxes[lenses[label]] = (
+            boxes[lenses[label]][0:lens_pos] + boxes[lenses[label]][lens_pos + 1 :]
+        )
 
 
 for s in data:
-    lens = ''
-    box = -1
-    focal = -1
-
-    if '=' in s:
+    if "=" in s:
         add_lens(s[:-2], int(s[-1]))
     else:
         remove_lens(s[:-1])
 
     for box in boxes[:5]:
         print(box)
-    print('-' * 5)
+    print("-" * 5)
 
 
 p2 = 0
@@ -78,4 +76,4 @@ for i in range(len(boxes)):
         c = boxes[i][j][1]
         print(a, b, c, a * b * c)
         p2 += a * b * c
-print('PART 2:', p2)
+print("PART 2:", p2)
